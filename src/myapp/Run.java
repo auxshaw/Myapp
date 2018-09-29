@@ -19,7 +19,7 @@ public class Run {
 		        command = scan.nextLine();}    		   
 		
 		//检查命令是否正确
-		Pattern pa = Pattern.compile("^\\-n\\s+\\d+\\s+\\-r\\s+\\d+$|^\\-r\\s+\\d+\\s+\\-n\\s+\\d+$");
+		Pattern pa = Pattern.compile("^\\-n\\s+\\d+\\s+\\-r\\s+\\d+$||^\\-r\\s+\\d+\\s+\\-n\\s+\\d+$");
         Matcher ma = pa.matcher(command); 
         if(!ma.matches()) {
         	System.out.println("命令格式错误，请重新输入");

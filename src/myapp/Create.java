@@ -1,9 +1,13 @@
 package myapp;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 
 public class Create {
+	
 	//在当前目录下生成练习题和答案
 	
 	public void cr() throws IOException {

@@ -1,8 +1,5 @@
 package myapp;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Fraction {
 	//分子
 	private int a;
@@ -60,19 +57,19 @@ public class Fraction {
 	    }
 	    
 	    
-	    //分数类转字符串类型 （要改）
+	    //分数类转字符串类型
 	    public String toString() {
 	    	if (this.b==1) {
-	    		return String.format("%d", this.a);
+	    		return String.valueOf(a);
 	    	}
 	    	else if(this.a>this.b) {
 	    		int c=0;
 	    		c=this.a/this.b;
 	    		this.a=this.a%this.b;
-	    		return String.format("%d'%d/%d", c, this.a, this.b);
+	    		return String.valueOf(c)+"'"+String.valueOf(a)+"/"+String.valueOf(b);
 	    	} 
 	    	else{
-	        return String.format("%d/%d", this.a, this.b);}
+	        return String.valueOf(a)+"/"+String.valueOf(b);}
 	    }
 	    
 	    //比较大小,比较此分数是否大于输入分数
