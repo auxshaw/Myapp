@@ -17,6 +17,7 @@ public class Fraction {
 	        simple();
 	 }
 	 
+	
 	//化简
 	 private Fraction simple() {
 		    int gcd = this.gcd(this.a, this.b);
@@ -72,6 +73,26 @@ public class Fraction {
 	        return String.valueOf(a)+"/"+String.valueOf(b);}
 	    }
 	    
+	    public static Fraction tofraction(String str) {
+	    	str=str.replaceAll(" ", "");
+	    	int a=1;
+	    	int b=1;
+	    	int s1=str.indexOf("'");
+	    	int s2=str.indexOf("/");
+	    	if(s1!=-1) {
+	    		int c=Integer.valueOf(str.substring(0,s1));
+	    		b=Integer.valueOf(str.substring(s2+1));
+	    		a=c*b+Integer.valueOf(str.substring(s1+1,s2));
+	    	} else if(s2!=-1) {
+	    		b=Integer.valueOf(str.substring(s2+1));
+	    		a=Integer.valueOf(str.substring(0,s2));
+	    	} else {
+	    		a=Integer.valueOf(str);
+	    		b=1;
+	    	}
+	        return new Fraction(a,b);
+		}
+    
 	    //比较大小,比较此分数是否大于输入分数
 	    public boolean isgreaterthan2(Fraction f) {
 	    	int z=this.a * f.b - f.a * this.b;

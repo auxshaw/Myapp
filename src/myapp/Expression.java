@@ -1,11 +1,11 @@
 package myapp;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Expression {
 	Random random=new Random();
+	Calc c=new Calc();
+	
 	//随机生成一个分数
 	public Fraction fraction_create(int r) {
 		int choose=random.nextInt(2)+1;
@@ -85,7 +85,6 @@ public class Expression {
 			break;
 		case '×':
 			exp= f1+" × "+f2;
-
 			break;
 		case '÷':
 			while(f2.isZero()) {
@@ -102,15 +101,14 @@ public class Expression {
 		Fraction f1=fraction_create(r);
 		Fraction f2=fraction_create(r);
 		Fraction f3=fraction_create(r);
-		Fraction ft= null;
-		Fraction ft2= null;
+		
 		char op1=operator_create();
 		char op2=operator_create();
 		String exp ="";
 		String exp1="";
 		switch (op1) {
 		case '+':
-			ft=f1.add(f2);
+			
 			exp= f1+" + "+f2;
 			break;
 		case '-':
@@ -118,142 +116,139 @@ public class Expression {
 			Fraction temp;
 			temp=f1;f1=f2;f2=temp;
 			}
-			ft=f1.sub(f2);
+			
 			exp= f1+" - "+f2;
 			break;
 		case '×':
-			ft=f1.mult(f2);
+			
 			exp= f1+" × "+f2;
 			break;
 		case '÷':
 			while(f2.isZero()) {
 				f2=fraction_create(r);
 			}
-			ft=f1.div(f2);
+			
 			exp= f1+" ÷ "+f2;
 			break;
 		}
 		switch (op2) {
 		case '+':
-			ft2=ft.add(f3);
+			
 			exp1=exp+" + "+f3;
 			break;
 		case '-':
-			if(!ft.isgreaterthan2(f3)) {	
-				ft2=f3.sub(ft);
+			if(!c.calculate(exp).isgreaterthan2(f3)) {	
+				
 			exp1= f3+" - "+"("+exp+")";
 			}else {
-				ft2=ft.sub(f3);
-			exp1= "("+exp+")"+" - "+f3;}
+				
+			exp1= exp+" - "+f3;}
 			break;
 		case '×':
-			ft2=ft.mult(f3);
+			
 			exp1= "("+exp+")"+" × "+f3;
 			break;
 		case '÷':
 			while(f3.isZero()) {
 				f3=fraction_create(r);
 			}
-			ft2=ft.div(f3);
+			
 			exp1="("+exp+")"+" ÷ "+f3;
 			break;
 		}		
-		//System.out.println(exp1+"="+ft2);
+		
 		return exp1;
 	}
 	
-	//三个运算符
-	public String threeopexp(int r){
-		Fraction f1=fraction_create(r);
-		Fraction f2=fraction_create(r);
-		Fraction f3=fraction_create(r);
-		Fraction f4=fraction_create(r);
-		Fraction ft= null;
-		Fraction ft1= null;
-		Fraction ft2= null;
-		char op1=operator_create();
-		char op2=operator_create();
-		char op3=operator_create();
-		String exp ="";
-		String exp1="";
-		String exp2="";
-		switch (op1) {
-		case '+':
-			ft=f1.add(f2);
-			exp= f1+" + "+f2;
-			break;
-		case '-':
-			if(!f1.isgreaterthan2(f2)) {
-			Fraction temp;
-			temp=f1;f1=f2;f2=temp;
+	//三个运算符改
+		public String threeopexp(int r){
+			Fraction f1=fraction_create(r);
+			Fraction f2=fraction_create(r);
+			Fraction f3=fraction_create(r);
+			Fraction f4=fraction_create(r);
+
+			char op1=operator_create();
+			char op2=operator_create();
+			char op3=operator_create();
+			String exp ="";
+			String exp1="";
+			String exp2="";
+			switch (op1) {
+			case '+':
+				
+				exp= f1+" + "+f2;
+				break;
+			case '-':
+				if(!f1.isgreaterthan2(f2)) {
+				Fraction temp;
+				temp=f1;f1=f2;f2=temp;
+				}
+				
+				exp= f1+" - "+f2;
+				break;
+			case '×':
+				
+				exp= f1+" × "+f2;
+				break;
+			case '÷':
+				while(f2.isZero()) {
+					f2=fraction_create(r);
+				}
+				
+				exp= f1+" ÷ "+f2;
+				break;
 			}
-			ft=f1.sub(f2);
-			exp= f1+" - "+f2;
-			break;
-		case '×':
-			ft=f1.mult(f2);
-			exp= f1+" × "+f2;
-			break;
-		case '÷':
-			while(f2.isZero()) {
-				f2=fraction_create(r);
+			switch (op2) {
+			case '+':
+				
+				exp1=exp+" + "+f3;
+				break;
+			case '-':
+				if(!c.calculate(exp).isgreaterthan2(f3)) {
+					
+				exp1= f3+" - "+"("+exp+")";
+				}else {
+				
+				exp1= exp+" - "+f3;}
+				break;
+			case '×':
+				
+				exp1= "("+exp+")"+" × "+f3;
+				break;
+			case '÷':
+				while(f3.isZero()) {
+					f3=fraction_create(r);
+				}
+				
+				exp1="("+exp+")"+" ÷ "+f3;
+				break;
+			}	
+			switch (op3) {
+			case '+':
+				
+				exp2=exp1+" + "+f4;
+				break;
+			case '-':
+				if(!c.calculate(exp1).isgreaterthan2(f4)) {
+					
+				exp2= f4+" - "+"("+exp1+")";
+				}else {
+					
+				exp2= exp1+" - "+f4;}
+				break;
+			case '×':
+				
+				exp2= "("+exp1+")"+" × "+f4;
+				break;
+			case '÷':
+				while(f4.isZero()) {
+					f4=fraction_create(r);
+				}
+				
+				exp2="("+exp1+")"+" ÷ "+f4;
+				break;
 			}
-			ft=f1.div(f2);
-			exp= f1+" ÷ "+f2;
-			break;
+			
+			return exp2;
 		}
-		switch (op2) {
-		case '+':
-			ft1=ft.add(f3);
-			exp1=exp+" + "+f3;
-			break;
-		case '-':
-			if(!ft.isgreaterthan2(f3)) {
-			ft1=f3.sub(ft);	
-			exp1= f3+" - "+"("+exp+")";
-			}else {
-			ft1=ft.sub(f3);
-			exp1= "("+exp+")"+" - "+f3;}
-			break;
-		case '×':
-			ft1=ft.mult(f3);
-			exp1= "("+exp+")"+" × "+f3;
-			break;
-		case '÷':
-			while(f3.isZero()) {
-				f3=fraction_create(r);
-			}
-			ft1=ft.div(f3);
-			exp1="("+exp+")"+" ÷ "+f3;
-			break;
-		}	
-		switch (op3) {
-		case '+':
-			ft2=ft1.add(f4);
-			exp2=exp1+" + "+f4;
-			break;
-		case '-':
-			if(!ft1.isgreaterthan2(f4)) {
-				ft2=f4.sub(ft1);
-			exp2= f4+" - "+"("+exp1+")";
-			}else {
-				ft2=ft1.sub(f4);
-			exp2= "("+exp1+")"+" - "+f4;}
-			break;
-		case '×':
-			ft2=ft1.mult(f4);
-			exp2= "("+exp1+")"+" × "+f4;
-			break;
-		case '÷':
-			while(f4.isZero()) {
-				f4=fraction_create(r);
-			}
-			ft2=ft1.div(f4);
-			exp2="("+exp1+")"+" ÷ "+f4;
-			break;
-		}
-		//System.out.println(exp2+"="+ft2);
-		return exp2;
-	}
-	
 }
